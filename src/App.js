@@ -3,6 +3,7 @@ import "./app.css"
 import AddItem from './AddItem'
 import FlipMove from 'react-flip-move'
 import TodoAPI from './apis/TodoAPI'
+var Completed = require('./Completed').handleComplete;
 var {Active,All,Complete} = require('./UI');
 var Delete = require('./DeleteItem').handleDelete;
 
@@ -51,6 +52,7 @@ componentDidUpdate(){
         active: [],
         count: 0
       })
+      
       this.showCompleted();
     }
     else{
@@ -60,6 +62,7 @@ componentDidUpdate(){
         active : tasks,
         completed: [],
         count: count1
+        
       })
       this.showAll();
     }  
@@ -68,91 +71,20 @@ componentDidUpdate(){
     
   //function to add the completed tasks to completed list
   handleComplete(key){
-    var index = this.state.all.findIndex(function(comp){
-      return comp.key === key
+
+    var all = this.state.all;
+    var count = this.state.count;
+    var comp = this.state.completed;
+    var active = this.state.active;
+    var newState = Completed(key,count, all,comp,active);
+
+    this.setState({
+      count : newState.count,
+      active : newState.active,
+      completed : newState.completed
     })
-    
-    var complete = this.state.all[index];
-    if(complete.completed === false){
-      
-      complete.completed = true
-      var tag = document.getElementById(complete.id);
-      tag.style.TransitionDuration = "1s"
-      tag.style.textDecoration = 'line-through';
-      tag.style.color = "grey"
-      var count = this.state.count;
-      count--;
-  
-      var tasks = this.state.all;
-      var NewActive = Delete(key,tasks);
-      
-      this.setState({
-        count: count ,
-        active : NewActive,
-        completed: [
-          ...this.state.completed,
-          complete
-        ]
-      })
-    }
-    else{
-      complete.completed = false
-      var tag2 = document.getElementById(complete.id);
-      tag2.style.textDecoration = 'none';
-      tag2.style.color = "black"
-      tag2.style.TransitionDuration = "1s"
-      var count1 = this.state.count;
-      count1++;
-  
-      var task = this.state.all;
-      var NewComp = Delete(key,task);
-      
-      this.setState({
-        count: count1 ,
-        completed : NewComp,
-        active: [
-          ...this.state.active,
-          complete
-        ]
-      })
-    }
   }
 
-  //couldn't get it worked properly on time cause of cursor jumping
-  // handleEdit(id){
-  //   var that = this;
-  //   var tasks = this.state.all;
-  //   var index = tasks.findIndex(function(edit){
-  //     return edit.id === id
-  //   })
-  //   var tag = document.getElementById(id);
-  //   var orginal = tasks[index].text;
-  //   tag.contentEditable = "true";
-  //   tag.focus();
-
-    
-  //   tag.addEventListener('keydown',listener,false);
-  //   tag.addEventListener('keyup',listener,false);
-  //   tag.addEventListener('mouseup',function(){
-  //     tag.contentEditable = "false"
-  //    })
-
-  //   function listener(event){
-  //     if(event.keyCode === 13 || event.which === 13){
-        
-  //       tag.contentEditable = "false"
-  //     }
-  //     else if(tag.innerHTML !== orginal)
-  //     {
-  //       var updated = tag.innerHTML;
-  //       that.setState({
-  //         return : (that.state.all[index].text = updated)
-  //       })
-  //   }
-    
-  // }
-
-  // }
 
   //function to show only active tasks when clicked on Active button
   showActive(){
@@ -240,11 +172,10 @@ componentDidUpdate(){
             <tbody>
               {/* FlipMove for animation */}
               <FlipMove duration={90} easing="ease-out">
-              {task.map (item => (
-                <tr id={item.id2} key={item.key} onDoubleClick={()=>{this.handleEdit(item.id)}} >
-                  <input type="checkbox" id={item.key}/>
-                  <label for={item.key} onClick={()=>{this.handleComplete(item.key)}} ></label>
-                  <td id={item.id} contentEditable="false" >{item.text}</td>
+              {this.state.all.map (item => (
+                <tr id={item.id2} key={item.key} >
+                  <td><input type="checkbox" id={item.key}/><label for={item.key} onClick={()=>{this.handleComplete(item.key)}} ></label></td>
+                  <td id={item.id} >{item.text}</td>
                   <td className="delete" onClick={()=>{this.handleDelete(item.key,task)}} >&#10006; </td>
                 </tr>
               ))}
@@ -261,10 +192,12 @@ componentDidUpdate(){
                 {this.state.count<=1 &&
                 <td>{this.state.count} item left</td>
                 }
+                <td>
                 <button id="all" onClick={()=>{this.showAll()}}>All</button>
                 <button id="active" onClick={()=> {this.showActive()}} >Active</button>
                 <button id="completed" onClick={()=> {this.showCompleted()}} >Completed</button>
                 <button id="clear" onClick={()=>{this.clearComp()}} >Clear completed</button>
+                </td>
               </tr>
             </tfoot>
           </table>

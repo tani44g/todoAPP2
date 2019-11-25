@@ -127,7 +127,7 @@ export default class AddItem extends Component{
             <div className='main'>
           
         <form onSubmit = {this.AddItem} autoComplete="off">
-        <span onClick={()=>{this.allCompleted()}} id="chevronDown" class="glyphicon glyphicon-chevron-down"></span>
+        <span onClick={()=>{this.allCompleted()}} id="chevronDown" className="glyphicon glyphicon-chevron-down"></span>
           <input id="task" type="text" ref="task" placeholder="What needs to be done?" onKeyUp={()=>{this.Searchitem()}} />
         </form>
           </div>

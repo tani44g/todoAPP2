@@ -52,12 +52,12 @@ tfoot td{
     padding-right: 70px;
 }
 
-tfoot td, tfoot button{
+tfoot td, td button{
     color: rgba(141, 139, 139, 0.712);
     font-size: 15px;
     background: none;
     display: inline;
-    
+    vertical-align: baseline;
     padding-right: 0;
     border: 1px solid transparent;
     margin-left: 15px;
@@ -84,6 +84,7 @@ tfoot button:hover,#all{
 
 #clear{
     border: none;
+    font-size: 15px;
 }
 
 #clear:hover{
@@ -148,11 +149,6 @@ tfoot{
 }
 
 
-
-[contentEditable]:focus{
-    display: inline-block;
-    outline: none;
-}
 input[type=checkbox]{
     display: none;
 }
@@ -176,7 +172,7 @@ label {
     border-right: none;
     content: "";
     height: 6px;
-    margin-top: 8px;
+    margin-bottom: 10px;
     opacity: 0;
     margin-left: 5px;
     display: inline-block;
