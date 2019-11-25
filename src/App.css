@@ -1,22 +1,210 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+*{
+    
+    margin: 0;
+    padding:0;
 }
 
-.App-logo {
-  height: 40vmin;
+body{
+    background-color: #F5F5F5;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+p{
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 100px;
+    color: rgba(199, 1, 1, 0.116);
+    font-family: 'Roboto',sans-serif;
 }
 
-.App-link {
-  color: #09d3ac;
+.main {
+    background-color: #FEFEFE;
+    position: absolute;
+    overflow: visible;
+    width: 550;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+	left: 31%;
+    top: 147px;
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    z-index: 5;
 }
+
+#chevronDown{
+    cursor: pointer;
+    opacity: 0.3;
+    visibility: hidden;
+    font-size: 24px;
+    display: inline-block;
+    padding: 25px 30px 0px 15px;
+}
+
+
+
+tfoot tr {
+    font-size: 16px;
+    height: 42px;
+}
+
+tfoot td{
+    padding-right: 70px;
+}
+
+tfoot td, tfoot button{
+    color: rgba(141, 139, 139, 0.712);
+    font-size: 15px;
+    background: none;
+    display: inline;
+    
+    padding-right: 0;
+    border: 1px solid transparent;
+    margin-left: 15px;
+    margin-right: 5px;
+    outline: none;
+}
+
+tfoot button{
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 0px 4px 0px 4px ;
+}
+
+tfoot button:hover,#all{
+    border-color: blanchedalmond;
+    border-radius: 5px;
+}
+
+.delete{
+    color: transparent;
+    float: right;
+    margin-right: 13px;
+}
+
+#clear{
+    border: none;
+}
+
+#clear:hover{
+    border: none;
+    text-decoration: underline;
+}
+
+td.delete:hover{
+    color: rgba(194, 11, 11, 0.199);
+    cursor: pointer;
+}
+
+
+#task {
+    width: 480px;
+    min-height: 65px;
+    height: 65px;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    display: inline-block;
+}
+
+#task:active{
+    border:none;
+}
+
+::placeholder{
+    opacity: 0.4;
+}
+
+tr{
+    width: 549px;
+    display: block;
+    height: 65px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+    background-color: white;
+}
+
+
+table{
+    z-index: 6;
+    position: relative;
+	left: 31.05%;
+    top: 69px;
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    
+      -webkit-box-shadow: -1px 11px 21px 0px rgba(0,0,0,0.32); 
+        box-shadow: -1px 11px 21px 0px rgba(0,0,0,0.32);
+}
+
+td{
+    display: block;
+    font-size: 24px;
+    margin-top: 15px;
+    display: inline-block;
+    font-family: 'Roboto',sans-serif;
+}
+
+tfoot{
+    display: none;
+}
+
+
+
+[contentEditable]:focus{
+    display: inline-block;
+    outline: none;
+}
+input[type=checkbox]{
+    display: none;
+}
+
+label {
+    margin-right: 16px;
+    margin-left: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 28px;
+    vertical-align: bottom;
+    width: 28px;
+    display: inline-block;
+  }
+  
+  .tabledata label::after {
+    border: 1.5px solid #5DC2AF;
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 6px;
+    margin-top: 8px;
+    opacity: 0;
+    margin-left: 5px;
+    display: inline-block;
+    transform: rotate(-50deg);
+    width: 16px;
+    transition: 0.3s;
+  }
+
+  input[type=checkbox]:checked + label::after{
+      opacity: 1;
+  }
+
+  
+  #rect1,#rect2{
+      display: none;
+      position: relative;
+      left: 31.4%;
+      top: 59px;
+      height: 5px;
+      width: 540px;
+      fill: white;
+      z-index: 6;
+      border: 1px solid rgba(0, 0, 0, 0.027);
+      border-top: none;
+  }
+  #rect2{
+      top:64px;
+      left: -7.5%;
+      width: 520px;
+  }
+  
